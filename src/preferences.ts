@@ -24,7 +24,10 @@ export const getSaveLocationPref = (): string => {
     const validSaveLocation = pref == '' || fs.existsSync(pref);
     if (!validSaveLocation) {
         vscode.window.showErrorMessage(
-            `Invalid save location, reverting to default. path not exists: ${pref}`,
+            vscode.l10n.t(
+                `Invalid save location, reverting to default. path not exists: {0}`,
+                pref,
+            ),
         );
         updatePreference('general.saveLocation', '');
         return '';

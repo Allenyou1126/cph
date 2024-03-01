@@ -93,7 +93,10 @@ export const runTestCase = (
     process.on('error', (err) => {
         console.error(err);
         vscode.window.showErrorMessage(
-            `Could not launch testcase process. Is '${language.compiler}' in your PATH?`,
+            vscode.l10n.t(
+                `Could not launch testcase process. Is '{0}' in your PATH?`,
+                language.compiler,
+            ),
         );
     });
 

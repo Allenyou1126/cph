@@ -35,7 +35,10 @@ export const submitKattisProblem = (problem: Problem) => {
             !existsSync(`${homedir}\\.kattis\\submit.py`)
         ) {
             vscode.window.showErrorMessage(
-                `Please ensure .kattisrc and submit.py are present in ${homedir}\\.kattis\\submit.py`,
+                vscode.l10n.t(
+                    `Please ensure .kattisrc and submit.py are present in {0}\\.kattis\\submit.py`,
+                    homedir,
+                ),
             );
             return;
         } else {
@@ -47,7 +50,10 @@ export const submitKattisProblem = (problem: Problem) => {
             !existsSync(`${homedir}/.kattis/submit.py`)
         ) {
             vscode.window.showErrorMessage(
-                `Please ensure .kattisrc and submit.py are present in ${homedir}/.kattis/submit.py`,
+                vscode.l10n.t(
+                    `Please ensure .kattisrc and submit.py are present in {0}/.kattis/submit.py`,
+                    homedir,
+                ),
             );
             return;
         } else {
@@ -110,7 +116,10 @@ export const setupCompanionServer = () => {
                         console.log('Companion server closed connection.');
                 } catch (e) {
                     vscode.window.showErrorMessage(
-                        `Error parsing problem from companion "${e}"`,
+                        vscode.l10n.t(
+                            `Error parsing problem from companion "{0}"`,
+                            String(e),
+                        ),
                     );
                 }
             });
@@ -134,7 +143,10 @@ export const setupCompanionServer = () => {
         server.listen(config.port);
         server.on('error', (err) => {
             vscode.window.showErrorMessage(
-                `Are multiple VSCode windows open? CPH will work on the first opened window. CPH server encountered an error: "${err.message}" , companion may not work.`,
+                vscode.l10n.t(
+                    `Are multiple VSCode windows open? CPH will work on the first opened window. CPH server encountered an error: "{0}" , companion may not work.`,
+                    err.message,
+                ),
             );
         });
         console.log('Companion server listening on port', config.port);
@@ -229,7 +241,10 @@ const handleNewProblem = async (problem: Problem) => {
             const templateExists = existsSync(templateLocation);
             if (!templateExists) {
                 vscode.window.showErrorMessage(
-                    `Template file does not exist: ${templateLocation}`,
+                    vscode.l10n.t(
+                        `Template file does not exist: {0}`,
+                        templateLocation,
+                    ),
                 );
             } else {
                 const templateContents =

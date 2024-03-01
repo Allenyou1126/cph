@@ -9,7 +9,7 @@ export const submitToKattis = async () => {
     const srcPath = vscode.window.activeTextEditor?.document.fileName;
     if (!srcPath) {
         vscode.window.showErrorMessage(
-            'Active editor is not supported for submission',
+            vscode.l10n.t('Active editor is not supported for submission'),
         );
         return;
     }
@@ -21,7 +21,9 @@ export const submitToKattis = async () => {
     const problem = getProblem(srcPath);
 
     if (!problem) {
-        vscode.window.showErrorMessage('Failed to parse current code.');
+        vscode.window.showErrorMessage(
+            vscode.l10n.t('Failed to parse current code.'),
+        );
         return;
     }
 
@@ -30,12 +32,12 @@ export const submitToKattis = async () => {
         url = new URL(problem.url);
     } catch (err) {
         console.error(err);
-        vscode.window.showErrorMessage('Not a kattis problem.');
+        vscode.window.showErrorMessage(vscode.l10n.t('Not a kattis problem.'));
         return;
     }
 
     if (url.hostname !== 'open.kattis.com') {
-        vscode.window.showErrorMessage('Not a kattis problem.');
+        vscode.window.showErrorMessage(vscode.l10n.t('Not a kattis problem.'));
         return;
     }
 
@@ -50,7 +52,7 @@ export const submitToCodeForces = async () => {
 
     if (!srcPath) {
         vscode.window.showErrorMessage(
-            'Active editor is not supported for submission',
+            vscode.l10n.t('Active editor is not supported for submission'),
         );
         return;
     }
@@ -62,7 +64,9 @@ export const submitToCodeForces = async () => {
     const problem = getProblem(srcPath);
 
     if (!problem) {
-        vscode.window.showErrorMessage('Failed to parse current code.');
+        vscode.window.showErrorMessage(
+            vscode.l10n.t('Failed to parse current code.'),
+        );
         return;
     }
 
@@ -71,12 +75,16 @@ export const submitToCodeForces = async () => {
         url = new URL(problem.url);
     } catch (err) {
         console.error(err);
-        vscode.window.showErrorMessage('Not a codeforces problem.');
+        vscode.window.showErrorMessage(
+            vscode.l10n.t('Not a codeforces problem.'),
+        );
         return;
     }
 
     if (url.hostname !== 'codeforces.com') {
-        vscode.window.showErrorMessage('Not a codeforces problem.');
+        vscode.window.showErrorMessage(
+            vscode.l10n.t('Not a codeforces problem.'),
+        );
         return;
     }
 

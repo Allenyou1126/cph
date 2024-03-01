@@ -2,6 +2,7 @@ import { Case, VSToWebViewMessage } from '../../types';
 import { useState, createRef, useEffect } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import React from 'react';
+import { l10n } from 'vscode';
 
 export default function CaseView(props: {
     num: number;
@@ -72,7 +73,7 @@ export default function CaseView(props: {
 
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text);
-        props.notify('Copied to clipboard');
+        props.notify(l10n.t('Copied to clipboard'));
     };
 
     useEffect(() => {
@@ -109,14 +110,16 @@ export default function CaseView(props: {
         resultText = result.stdout.trim() || ' ';
     }
     if (!result) {
-        resultText = 'Run to show output';
+        resultText = l10n.t('Run to show output');
     }
     if (running) {
         resultText = '...';
     }
     const passFailText = result ? (result.pass ? 'passed' : 'failed') : '';
     const caseClassName = 'case ' + (running ? 'running' : passFailText);
-    const timeText = result?.timeOut ? 'Timed Out' : result?.time + 'ms';
+    const timeText = result?.timeOut
+        ? l10n.t('Timed Out')
+        : result?.time + 'ms';
 
     return (
         <div className={caseClassName}>
@@ -124,14 +127,14 @@ export default function CaseView(props: {
                 <div className="toggle-minimize" onClick={toggle}>
                     <span className="case-number case-title">
                         {minimized && (
-                            <span onClick={expand} title="Expand">
+                            <span onClick={expand} title={l10n.t('Expand')}>
                                 <span className="icon">
                                     <i className="codicon codicon-chevron-down"></i>
                                 </span>
                             </span>
                         )}
                         {!minimized && (
-                            <span onClick={minimize} title="Minimize">
+                            <span onClick={minimize} title={l10n.t('Minimize')}>
                                 <span className="icon">
                                     <i className="codicon codicon-chevron-up"></i>
                                 </span>
@@ -151,7 +154,9 @@ export default function CaseView(props: {
                                     }
                                 >
                                     &nbsp; &nbsp;
-                                    {result.pass ? 'Passed' : 'Failed'}
+                                    {result.pass
+                                        ? l10n.t('Passed')
+                                        : l10n.t('Failed')}
                                 </span>
                             </span>
                             <span className="exec-time">{timeText}</span>
@@ -161,7 +166,7 @@ export default function CaseView(props: {
                 <div className="time">
                     <button
                         className="btn btn-green"
-                        title="Run Again"
+                        title={l10n.t('Run Again')}
                         onClick={rerun}
                         disabled={running}
                     >
@@ -171,7 +176,7 @@ export default function CaseView(props: {
                     </button>
                     <button
                         className="btn btn-red"
-                        title="Delete Testcase"
+                        title={l10n.t('Delete Testcase')}
                         onClick={() => {
                             props.remove(id);
                         }}
@@ -191,9 +196,9 @@ export default function CaseView(props: {
                             onClick={() => {
                                 copyToClipboard(input);
                             }}
-                            title="Copy to clipboard"
+                            title={l10n.t('Copy to clipboard')}
                         >
-                            Copy
+                            {l10n.t('Copy')}
                         </div>
                         <TextareaAutosize
                             className="selectable input-textarea"
@@ -204,15 +209,15 @@ export default function CaseView(props: {
                         />
                     </div>
                     <div className="textarea-container">
-                        Expected Output:
+                        {l10n.t('Expected Output:')}
                         <div
                             className="clipboard"
                             onClick={() => {
                                 copyToClipboard(output);
                             }}
-                            title="Copy to clipboard"
+                            title={l10n.t('Copy to clipboard')}
                         >
-                            Copy
+                            {l10n.t('Copy')}
                         </div>
                         <TextareaAutosize
                             className="selectable expected-textarea"
@@ -222,15 +227,15 @@ export default function CaseView(props: {
                     </div>
                     {props.case.result != null && (
                         <div className="textarea-container">
-                            Received Output:
+                            {l10n.t('Received Output:')}
                             <div
                                 className="clipboard"
                                 onClick={() => {
                                     copyToClipboard(resultText);
                                 }}
-                                title="Copy to clipboard"
+                                title={l10n.t('Copy to clipboard')}
                             >
-                                Copy
+                                {l10n.t('Copy')}
                             </div>
                             <>
                                 <TextareaAutosize
@@ -243,7 +248,7 @@ export default function CaseView(props: {
                     )}
                     {stderror && stderror.length > 0 && (
                         <>
-                            Standard Error:
+                            {l10n.t('Standard Error:')}
                             <TextareaAutosize
                                 className="selectable stderror-textarea"
                                 value={trunctateStdout(stderror)}
@@ -260,7 +265,7 @@ export default function CaseView(props: {
 /** Limit string length to 100,000. */
 const trunctateStdout = (stdout: string): string => {
     if (stdout.length > 100000) {
-        stdout = '[Truncated]\n' + stdout.substr(0, 100000);
+        stdout = l10n.t('[Truncated]\n{0}', stdout.substr(0, 100000));
     }
     return stdout;
 };

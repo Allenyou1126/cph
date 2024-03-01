@@ -1,0 +1,17 @@
+{
+    "Please ensure .kattisrc and submit.py are present in {0}\\.kattis\\submit.py": "Please ensure .kattisrc and submit.py are present in {0}\\.kattis\\submit.py",
+    "Please ensure .kattisrc and submit.py are present in {0}/.kattis/submit.py": "Please ensure .kattisrc and submit.py are present in {0}/.kattis/submit.py",
+    "Error parsing problem from companion \"{0}\"": "Error parsing problem from companion \"{0}\"",
+    "Are multiple VSCode windows open? CPH will work on the first opened window. CPH server encountered an error: \"{0}\" , companion may not work.": "Are multiple VSCode windows open? CPH will work on the first opened window. CPH server encountered an error: \"{0}\" , companion may not work.",
+    "Template file does not exist: {0}": "Template file does not exist: {0}",
+    "Could not launch the compiler {0}. Is it installed?": "Could not launch the compiler {0}. Is it installed?",
+    "Could not launch testcase process. Is '{0}' in your PATH?": "Could not launch testcase process. Is '{0}' in your PATH?",
+    " $(run-all)  Run Testcases": " $(run-all)  Run Testcases",
+    "Competitive Programming Helper - Run all testcases or create if none exist.": "Competitive Programming Helper - Run all testcases or create if none exist.",
+    "Invalid save location, reverting to default. path not exists: {0}": "Invalid save location, reverting to default. path not exists: {0}",
+    "Active editor is not supported for submission": "Active editor is not supported for submission",
+    "Failed to parse current code.": "Failed to parse current code.",
+    "Not a kattis problem.": "Not a kattis problem.",
+    "Not a codeforces problem.": "Not a codeforces problem.",
+    "Unsupported file extension. Only these types are valid: {0}": "Unsupported file extension. Only these types are valid: {0}"
+}

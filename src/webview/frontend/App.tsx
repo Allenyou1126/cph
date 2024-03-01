@@ -11,6 +11,7 @@ import {
     WebViewpersistenceState,
 } from '../../types';
 import CaseView from './CaseView';
+import { l10n } from 'vscode';
 declare const vscodeApi: {
     postMessage: (message: WebviewToVSEvent) => void;
     getState: () => WebViewpersistenceState | undefined;
@@ -311,7 +312,7 @@ function Judge(props: {
                     <span className="icon">
                         <i className="codicon codicon-cloud-upload"></i>
                     </span>{' '}
-                    Submit
+                    {l10n.t('Submit')}
                 </button>
             );
         } else if (url.hostname == 'open.kattis.com') {
@@ -321,25 +322,31 @@ function Judge(props: {
                         <span className="icon">
                             <i className="codicon codicon-cloud-upload"></i>
                         </span>{' '}
-                        Submit on Kattis
+                        {l10n.t('Submit on Kattis')}
                     </button>
                     {waitingForSubmit && (
                         <>
-                            <span className="loader"></span> Submitting...
+                            <span className="loader"></span>{' '}
+                            {l10n.t('Submitting...')}
                             <br />
                             <small>
-                                To submit to Kattis, you need to have the{' '}
+                                {l10n.t(
+                                    'To submit to Kattis, you need to have the',
+                                )}{' '}
                                 <a href="https://github.com/Kattis/kattis-cli/blob/main/submit.py">
-                                    submission client{' '}
+                                    {l10n.t('submission client')}{' '}
                                 </a>
-                                and the{' '}
+                                {l10n.t('and the')}{' '}
                                 <a href="https://open.kattis.com/download/kattisrc">
                                     configuration file{' '}
                                 </a>
-                                downloaded in a folder called .kattis in your
-                                home directory.
+                                {l10n.t(
+                                    'downloaded in a folder called .kattis in your home directory.',
+                                )}
                                 <br />
-                                Submission result will open in your browser.
+                                {l10n.t(
+                                    'Submission result will open in your browser.',
+                                )}
                                 <br />
                                 <br />
                             </small>
@@ -365,7 +372,7 @@ function Judge(props: {
                 <h1 className="problem-name">
                     <a href={getHref()}>{problem.name}</a>{' '}
                     {compiling && (
-                        <b className="compiling" title="Compiling">
+                        <b className="compiling" title={l10n.t('Compiling')}>
                             <span className="loader"></span>
                         </b>
                     )}
@@ -377,12 +384,12 @@ function Judge(props: {
                     <button
                         className="btn btn-green"
                         onClick={newCase}
-                        title="Create a new empty testcase"
+                        title={l10n.t('Create a new empty testcase')}
                     >
                         <span className="icon">
                             <i className="codicon codicon-add"></i>
                         </span>{' '}
-                        New Testcase
+                        {l10n.t('New Testcase')}
                     </button>
                     {renderSubmitButton()}
                 </div>
@@ -395,7 +402,8 @@ function Judge(props: {
                         checked={onlineJudgeEnv}
                     />
                     <span>
-                        Set <code>ONLINE_JUDGE</code>
+                        {l10n.t('Set ')}
+                        <code>ONLINE_JUDGE</code>
                     </span>
                 </span>
                 <br />
@@ -404,7 +412,7 @@ function Judge(props: {
                     <small>
                         <a href="https://rb.gy/vw82u5" className="btn">
                             <i className="codicon codicon-feedback"></i>{' '}
-                            Feedback
+                            {l10n.t('Feedback')}
                         </a>
                     </small>
                 </div>
@@ -418,73 +426,79 @@ function Judge(props: {
                     <button
                         className="btn"
                         onClick={runAll}
-                        title="Run all testcases again"
+                        title={l10n.t('Run all testcases again')}
                     >
                         <span className="icon">
                             <i className="codicon codicon-debug-restart"></i>
                         </span>{' '}
-                        <span className="action-text">Run All</span>
+                        <span className="action-text">{l10n.t('Run All')}</span>
                     </button>
                     <button
                         className="btn btn-green"
                         onClick={newCase}
-                        title="Create a new empty testcase"
+                        title={l10n.t('Create a new empty testcase')}
                     >
                         <span className="icon">
                             <i className="codicon codicon-add"></i>
                         </span>{' '}
-                        <span className="action-text">New</span>
+                        <span className="action-text">{l10n.t('New')}</span>
                     </button>
                 </div>
                 <div className="row">
                     <button
                         className="btn btn-orange"
                         onClick={stop}
-                        title="Kill all running testcases"
+                        title={l10n.t('Kill all running testcases')}
                     >
                         <span className="icon">
                             <i className="codicon codicon-circle-slash"></i>
                         </span>{' '}
-                        <span className="action-text">Stop</span>
+                        <span className="action-text">{l10n.t('Stop')}</span>
                     </button>
                     <a
                         className="btn"
-                        title="Help"
+                        title={l10n.t('Help')}
                         href="https://github.com/agrawal-d/cph/blob/main/docs/user-guide.md"
                     >
                         <span className="icon">
                             <i className="codicon codicon-question"></i>
                         </span>{' '}
-                        <span className="action-text">Help</span>
+                        <span className="action-text">{l10n.t('Help')}</span>
                     </a>
                     <button
                         className="btn btn-red right"
                         onClick={deleteTcs}
-                        title="Delete all testcases and close results window"
+                        title={l10n.t(
+                            'Delete all testcases and close results window',
+                        )}
                     >
                         <span className="icon">
                             <i className="codicon codicon-trash"></i>
                         </span>{' '}
-                        <span className="action-text">Delete</span>
+                        <span className="action-text">{l10n.t('Delete')}</span>
                     </button>
                 </div>
             </div>
 
             {waitingForSubmit && (
                 <div className="margin-10">
-                    <span className="loader"></span> Waiting for extension ...
+                    <span className="loader"></span>{' '}
+                    {l10n.t('Waiting for extension ...')}
                     <br />
                     <small>
-                        To submit to codeforces, you need to have the{' '}
+                        {l10n.t(
+                            'To submit to codeforces, you need to have the',
+                        )}{' '}
                         <a href="https://github.com/agrawal-d/cph-submit">
-                            cph-submit browser extension{' '}
+                            {l10n.t('cph-submit browser extension')}{' '}
                         </a>
-                        installed, and a browser window open. You can change
-                        language ID from VS Code settings.
+                        {l10n.t(
+                            'installed, and a browser window open. You can change language ID from VS Code settings.',
+                        )}
                         <br />
                         <br />
-                        Hint: You can also press <kbd>Ctrl+Alt+S</kbd> to
-                        submit.
+                        {l10n.t('Hint: You can also press')}{' '}
+                        <kbd>Ctrl+Alt+S</kbd> {l10n.t('to submit.')}
                     </small>
                 </div>
             )}
@@ -603,15 +617,16 @@ function App() {
                 <div className={`ui p10 fallback`}>
                     <div className="text-center">
                         <p>
-                            This document does not have a CPH problem associated
-                            with it.
+                            {l10n.t(
+                                'This document does not have a CPH problem associated with it.',
+                            )}
                         </p>
                         <br />
                         <div className="btn btn-block" onClick={createProblem}>
                             <span className="icon">
                                 <i className="codicon codicon-add"></i>
                             </span>{' '}
-                            Create Problem
+                            {l10n.t('Create Problem')}
                         </div>
                         <a
                             className="btn btn-block btn-green"
@@ -620,7 +635,7 @@ function App() {
                             <span className="icon">
                                 <i className="codicon codicon-question"></i>
                             </span>{' '}
-                            How to use this extension
+                            {l10n.t('How to use this extension')}
                         </a>
                     </div>
                 </div>
@@ -635,16 +650,17 @@ function App() {
                             className="codicon codicon-warning"
                             style={{ fontSize: '20px' }}
                         ></i>{' '}
-                        Competitive Programming Helper
+                        {l10n.t('Competitive Programming Helper')}
                     </h4>
                     <p>
-                        The sidebar width is too small to display the UI. Please
-                        click and drag from the edge of the sidebar to increase
-                        the width.
+                        {l10n.t(
+                            'The sidebar width is too small to display the UI. Please click and drag from the edge of the sidebar to increase the width.',
+                        )}
                     </p>
                     <small>
-                        This warning will go away once the width is large
-                        enough.
+                        {l10n.t(
+                            'This warning will go away once the width is large enough.',
+                        )}
                     </small>
                     <br />
                     <br />
@@ -657,7 +673,7 @@ function App() {
                                 className="codicon codicon-eye-closed"
                                 style={{ fontSize: '20px' }}
                             ></i>{' '}
-                            Ignore warning forever
+                            {l10n.t('Ignore warning forever')}
                         </span>
                     </div>
                 </div>

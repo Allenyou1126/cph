@@ -151,7 +151,10 @@ export const randomId = () => Math.floor(Date.now() + Math.random() * 100);
 export const checkUnsupported = (srcPath: string): boolean => {
     if (!isValidLanguage(srcPath)) {
         vscode.window.showErrorMessage(
-            `Unsupported file extension. Only these types are valid: ${config.supportedExtensions}`,
+            vscode.l10n.t(
+                'Unsupported file extension. Only these types are valid: {0}',
+                config.supportedExtensions,
+            ),
         );
         return true;
     }

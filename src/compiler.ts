@@ -147,7 +147,10 @@ export const compileFile = async (srcPath: string): Promise<boolean> => {
             compiler = spawn(language.compiler, flags);
         } catch (err) {
             vscode.window.showErrorMessage(
-                `Could not launch the compiler ${language.compiler}. Is it installed?`,
+                vscode.l10n.t(
+                    `Could not launch the compiler {0}. Is it installed?`,
+                    language.compiler,
+                ),
             );
             throw err;
         }
